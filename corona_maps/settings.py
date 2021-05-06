@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'maps.apps.MapsConfig',
 ]
 MIDDLEWARE = [
@@ -74,23 +75,23 @@ WSGI_APPLICATION = 'corona_maps.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 ####################### DEFAULT DO DJANGO
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-####################### DJANGO
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'covid_maps',
-        'USER': 'coviduser',
-        'PASSWORD': 'covidsenha',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+####################### DOCKER
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'covid_maps',
+#         'USER': 'coviduser',
+#         'PASSWORD': 'covidsenha',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
