@@ -1,21 +1,22 @@
-from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.http import Http404
-from .models import Profile
-from .serializers import MapsSerializer
-import requests
+from django.shortcuts import render, redirect
 from django.forms.models import model_to_dict
+from django.http import Http404, HttpResponse
+from rest_framework.response import Response
+from .serializers import MapsSerializer
+from .models import Profile
+import requests
+
 
 def index(request):
-    raise Http404()
+    return HttpResponse("Olá mundo! Este é o Servidor para o Projeto 2 de TecWeb \n Por Amanda Carmo e Antonio Fonseca")
 
 
 @api_view(['GET', 'POST'])
 def api_forms(request):
     if request.method == 'POST':
         new_note_data = request.data
-        Profile.objects.create(vac_propria = new_note_data['resp_1'], vac_pais = float(new_note_data['resp_2']), disponibilidade_quarentena =new_note_data['resp_3'])
+        Profile.objects.create(vac_propria = new_note_data['resp_1'], vac_pais = float(new_note_data['resp_2']), disponibilidade_quarentena =new_note_data['resp_3'], nome_user = new_note_data['resp_4'])
     serialized_note = MapsSerializer(Profile.objects.latest('id'))
     return Response(serialized_note.data)
     
@@ -40,13 +41,11 @@ def api_pais(request, pais,forms_id):
         #FALTA TODA A CONTA
         #PEGAR API COM DADOS DE VACINA POR PAIS
 
-
         return Response(response)
 
 
 @api_view(['GET', 'POST'])
 def api_feed(request):
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
     if request.method == 'GET':
         url = "https://covid-19-data.p.rapidapi.com/help/countries"
         headers = {
