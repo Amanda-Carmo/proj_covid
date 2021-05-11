@@ -13,6 +13,14 @@ def index(request):
 
 
 @api_view(['GET', 'POST'])
+def test_user(request):
+    usados = Profile.objects.all().values_list('nome_user')
+    usados = [a[0] for a in usados]
+    return Response(usados)
+
+
+
+@api_view(['GET', 'POST'])
 def api_forms(request):
     if request.method == 'POST':
         new_note_data = request.data
