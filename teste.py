@@ -1,14 +1,32 @@
 import requests
+import pandas as pd
 
-url = "https://covid-19-data.p.rapidapi.com/country"
+delta = 0
+idade = 21
+porcentagem = 50.5
+if True:
+    if idade < 60:
+        delta += ((60 - idade)/(10)) **1.75 #meses
 
-querystring = {"name":"italy","format":"json"}
+print("Resultdado para {} == {:.2f} meses".format(idade, delta))
 
-headers = {
-    'x-rapidapi-key': "67213a5abfmsh326035097963877p182cbcjsn8d7706e91f9e",
-    'x-rapidapi-host': "covid-19-data.p.rapidapi.com"
-    }
 
-response = requests.request("GET", url, headers=headers, params=querystring)
 
-print(response.text)
+# data =  pd.read_csv("https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/country_data/Austria.csv")
+# print(data.shape)
+
+# linha = data.tail(1)
+# teste = linha['people_fully_vaccinated'].values[0]
+# print(teste)
+
+
+# url = "https://countriesnow.space/api/v0.1/countries/population"
+
+# payload = {"country": "Austria"}
+# headers = {}
+
+# response = requests.request("POST", url, headers=headers, data=payload)
+# final = response.json()["data"]["populationCounts"][-1]['value']
+# print(final)
+
+# print((teste/final)*100)
