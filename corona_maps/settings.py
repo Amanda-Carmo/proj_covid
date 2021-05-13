@@ -87,24 +87,24 @@ WSGI_APPLICATION = 'corona_maps.wsgi.application'
 #     }
 # }
 ####################### DOCKER
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'covid_maps',
-        'USER': 'coviduser',
-        'PASSWORD': 'covidsenha',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.config(
-#         default='postgresql://localhost/covid_maps?user=coviduser&password=covidsenha',
-#         conn_max_age=600,
-#         ssl_require=not DEBUG
-#     )
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'covid_maps',
+#         'USER': 'coviduser',
+#         'PASSWORD': 'covidsenha',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(
+        default='postgresql://localhost/covid_maps?user=coviduser&password=covidsenha',
+        conn_max_age=600,
+        ssl_require=not DEBUG
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
