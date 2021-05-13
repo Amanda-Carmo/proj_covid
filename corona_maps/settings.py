@@ -100,7 +100,7 @@ WSGI_APPLICATION = 'corona_maps.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://localhost/getit?user=getituser&password=getitsenha',
+        default='postgresql://localhost/covid_maps?user=coviduser&password=covidsenha',
         conn_max_age=600,
         ssl_require=not DEBUG
     )
