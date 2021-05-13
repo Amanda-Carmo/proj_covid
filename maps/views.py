@@ -36,7 +36,9 @@ def api_pais(request):
         new_note_data = request.data
         pais = new_note_data['resp_2']
         forms_id = int(new_note_data['resp_1'])
-        # forms = [ id['id'] for id in Profile.objects.values('id')]  ##LISTA DE IDS
+        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        print([ id['id'] for id in Profile.objects.values('id')])  ##LISTA DE IDS
+        print(new_note_data)
         forms = Profile.objects.get(id = forms_id)
         dict_forms = model_to_dict(forms)
 
@@ -68,8 +70,8 @@ def api_pais(request):
             dif = porcentagem - porcent_ja_vac
             delta += tempo_vacinando*(dif/porcent_ja_vac)
 
-        # resp = {"pais" : pais,"delta" : delta, "idade": idade, "pop_vacinada": pop_vacinada, "pop_atual":pop_atual, "razao":porcent_ja_vac }
-        return Response(delta)
+        resp = {"pais" : pais,"delta" : delta,"porcentagem": porcent_ja_vac} #, "idade": idade, "pop_vacinada": pop_vacinada, "pop_atual":pop_atual, "razao":porcent_ja_vac }
+        return Response(resp)
         
 
 @api_view(['GET', 'POST'])
