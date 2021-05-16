@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'maps.apps.MapsConfig',
-    'rest_framework'
 ]
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
