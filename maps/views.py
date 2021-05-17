@@ -75,7 +75,7 @@ def api_pais(request):
                 devolver.append(resp)
             except Exception as e: 
                 print(e)
-                devolver.append("sem dados")
+                devolver.append("")
         print(devolver)
         return Response(devolver)
         
