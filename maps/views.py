@@ -21,11 +21,11 @@ def index(request):
 def api_forms(request):
     if request.method == 'POST':
         new_note_data = request.data
-        Profile.objects.create(vac_propria = new_note_data['resp_1'], 
-                                vac_pais = float(new_note_data['resp_2']), 
-                                disponibilidade_quarentena =new_note_data['resp_3'], 
+        Profile.objects.create(vac_propria = new_note_data['vac_propria'], 
+                                vac_pais = float(new_note_data['vac_pais']), 
+                                disponibilidade_quarentena =new_note_data['disponibilidade_quarentena'], 
                                 nome_user = new_note_data['resp_4'],
-                                idade = new_note_data['resp_5'])
+                                idade = new_note_data['idade'])
     serialized_note = MapsSerializer(Profile.objects.latest('id'))
     return Response(serialized_note.data)
     
@@ -33,47 +33,51 @@ def api_forms(request):
 @api_view(['GET', 'POST'])
 def api_pais(request):
     if request.method == 'POST':
-        new_note_data = request.data
-        print("!!!!!!!!!!!!!!!!!!!!!!!!")
-        print(new_note_data)
-        pais = new_note_data['resp_2']
-        forms_id = int(new_note_data['resp_1'])
-        print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        print([ id['id'] for id in Profile.objects.values('id')])  ##LISTA DE IDS
-        print(new_note_data)
-        forms = Profile.objects.get(id = forms_id)
-        dict_forms = model_to_dict(forms)
+        new_note_data = request.data #''.join(random.choices(string.ascii_uppercase + string.digits, k=N))
+        Profile.objects.create(vac_propria = new_note_data['vac_propria'], 
+                                vac_pais = float(new_note_data['vac_pais']), 
+                                disponibilidade_quarentena =new_note_data['disponibilidade_quarentena'], 
+                                # nome_user = new_note_data['resp_4'],
+                                idade = new_note_data['idade'])
 
-        url = "https://covid-19-data.p.rapidapi.com/country"
-        querystring = {"name":pais}
-        headers = {'x-rapidapi-key': "af765fe219msha36798338e049f0p1d1272jsn67587def0601",'x-rapidapi-host': "covid-19-data.p.rapidapi.com" }
-        response = requests.request("GET", url, headers=headers, params=querystring)
-
-
-        data =  pd.read_csv("https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/country_data/{}.csv".format(pais))
-        linha = data.tail(1)
-        pop_vacinada = linha['total_vaccinations'].values[0]
-        tempo_vacinando = data.shape[0]/30
-
-        url = "https://countriesnow.space/api/v0.1/countries/population"
-        response2 = requests.request("POST", url, headers={}, data={"country": pais})
-        pop_atual = response2.json()["data"]["populationCounts"][-1]['value']
-
+        lista_paises = new_note_data['continente'][1:-1].split(",")
+        idade = float(new_note_data['idade'])
+        porcentagem = float(new_note_data['vac_pais'])
         
-        
-        delta = 0
-        idade = dict_forms["idade"]
-        porcentagem = dict_forms["vac_pais"]
-        if dict_forms["vac_propria"]:
-            if idade < 60:
-                delta += ((60 - idade)/(10)) **2 #meses
-        porcent_ja_vac = (pop_vacinada/pop_atual)*100
-        if porcentagem  > porcent_ja_vac:
-            dif = porcentagem - porcent_ja_vac
-            delta += tempo_vacinando*(dif/porcent_ja_vac)
+        devolver = []
+        for pais in lista_paises:
+            try:
+                url = "https://covid-19-data.p.rapidapi.com/country"
+                querystring = {"name":pais}
+                headers = {'x-rapidapi-key': "af765fe219msha36798338e049f0p1d1272jsn67587def0601",'x-rapidapi-host': "covid-19-data.p.rapidapi.com" }
+                response = requests.request("GET", url, headers=headers, params=querystring)
 
-        resp = {"pais" : pais,"delta" : delta,"porcentagem": porcent_ja_vac} #, "idade": idade, "pop_vacinada": pop_vacinada, "pop_atual":pop_atual, "razao":porcent_ja_vac }
-        return Response(resp)
+                data =  pd.read_csv("https://github.com/owid/covid-19-data/raw/master/public/data/vaccinations/country_data/{}.csv".format(pais))
+                linha = data.tail(1)
+                pop_vacinada = linha['total_vaccinations'].values[0]
+                tempo_vacinando = data.shape[0]/30
+
+                url = "https://countriesnow.space/api/v0.1/countries/population"
+                response2 = requests.request("POST", url, headers={}, data={"country": pais})
+                pop_atual = response2.json()["data"]["populationCounts"][-1]['value']
+                
+                
+                delta = 0
+                if new_note_data['vac_propria']== 'True':
+                    if idade < 60:
+                        delta += ((60 - idade)/(10)) **2 #meses
+                porcent_ja_vac = (pop_vacinada/pop_atual)*100
+                if porcentagem  > porcent_ja_vac:
+                    dif = porcentagem - porcent_ja_vac
+                    delta += tempo_vacinando*(dif/porcent_ja_vac)
+
+                resp = {"pais" : pais,"delta" : delta,"porcentagem": porcent_ja_vac} #, "idade": idade, "pop_vacinada": pop_vacinada, "pop_atual":pop_atual, "razao":porcent_ja_vac }
+                devolver.append(resp)
+            except Exception as e: 
+                print(e)
+                devolver.append("sem dados")
+        print(devolver)
+        return Response(devolver)
         
 
 @api_view(['GET', 'POST'])
