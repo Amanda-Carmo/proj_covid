@@ -34,6 +34,8 @@ def api_forms(request):
 def api_pais(request):
     if request.method == 'POST':
         new_note_data = request.data
+        print("!!!!!!!!!!!!!!!!!!!!!!!!")
+        print(new_note_data)
         pais = new_note_data['resp_2']
         forms_id = int(new_note_data['resp_1'])
         print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

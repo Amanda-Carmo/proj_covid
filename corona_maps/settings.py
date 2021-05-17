@@ -30,9 +30,9 @@ SECRET_KEY = 'django-insecure-r!2wfb=y#l9ymt42$y0@28%fdbu4mzj+*vlb@vd&fs2haoac5f
 DEBUG = True
 
 ALLOWED_HOSTS = ['agile-meadow-58579.herokuapp.com', 'localhost', '127.0.0.1', '0.0.0.0']
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
 
-
-# Application definition
+CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'maps.apps.MapsConfig',
 ]
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'corona_maps.urls'
