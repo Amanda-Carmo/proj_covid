@@ -21,10 +21,9 @@ def index(request):
 def api_forms(request):
     if request.method == 'POST':
         new_note_data = request.data
-        Profile.objects.create(vac_propria = new_note_data['vac_propria'], 
+        Profile.objects.create(vac_propria = (new_note_data['vac_propria'] == "True") , 
                                 vac_pais = float(new_note_data['vac_pais']), 
-                                disponibilidade_quarentena =new_note_data['disponibilidade_quarentena'], 
-                                nome_user = new_note_data['resp_4'],
+                                disponibilidade_quarentena =(new_note_data['disponibilidade_quarentena'] == "True"), 
                                 idade = new_note_data['idade'])
     serialized_note = MapsSerializer(Profile.objects.latest('id'))
     return Response(serialized_note.data)
