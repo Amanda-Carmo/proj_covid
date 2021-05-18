@@ -32,18 +32,16 @@ def api_forms(request):
 @api_view(['GET', 'POST'])
 def api_pais(request):
     if request.method == 'POST':
-        new_note_data = request.data #''.join(random.choices(string.ascii_uppercase + string.digits, k=N))
-        Profile.objects.create(vac_propria = new_note_data['vac_propria'], 
-                                vac_pais = float(new_note_data['vac_pais']), 
-                                disponibilidade_quarentena =new_note_data['disponibilidade_quarentena'], 
-                                # nome_user = new_note_data['resp_4'],
-                                idade = new_note_data['idade'])
+        new_note_data = request.data
+        forms_id = int(new_note_data['id'])
+        forms = Profile.objects.get(id = forms_id)
+        dict_forms = model_to_dict(forms)
         
         pais = new_note_data['pais']
         
             
-        idade = float(new_note_data['idade'])
-        porcentagem = float(new_note_data['vac_pais'])
+        idade = float(dict_forms['idade'])
+        porcentagem = float(dict_forms['vac_pais'])
         
         try:
                 url = "https://covid-19-data.p.rapidapi.com/country"
@@ -62,7 +60,7 @@ def api_pais(request):
                 
                 
                 delta = 0
-                if new_note_data['vac_propria']== 'True':
+                if dict_forms['vac_propria']== 'True':
                     if idade < 60:
                         delta += ((60 - idade)/(10)) **2 #meses
                 porcent_ja_vac = (pop_vacinada/pop_atual)*100
