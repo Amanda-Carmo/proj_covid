@@ -39,20 +39,13 @@ def api_pais(request):
                                 # nome_user = new_note_data['resp_4'],
                                 idade = new_note_data['idade'])
         
-        cont = new_note_data['continente']
+        pais = new_note_data['pais']
         
-        with open("paises.json", 'r') as fil:
-            dic_paiises = fil
-        lista_paises= dic_paiises[cont]
-        print(cont)
-        print(type(dic_paiises))
             
         idade = float(new_note_data['idade'])
         porcentagem = float(new_note_data['vac_pais'])
         
-        devolver = []
-        for pais in lista_paises:
-            try:
+        try:
                 url = "https://covid-19-data.p.rapidapi.com/country"
                 querystring = {"name":pais}
                 headers = {'x-rapidapi-key': "af765fe219msha36798338e049f0p1d1272jsn67587def0601",'x-rapidapi-host': "covid-19-data.p.rapidapi.com" }
@@ -78,12 +71,10 @@ def api_pais(request):
                     delta += tempo_vacinando*(dif/porcent_ja_vac)
 
                 resp = {"pais" : pais,"delta" : delta,"porcentagem": porcent_ja_vac} #, "idade": idade, "pop_vacinada": pop_vacinada, "pop_atual":pop_atual, "razao":porcent_ja_vac }
-                devolver.append(resp)
-            except Exception as e: 
+        except Exception as e: 
                 print(e)
-                devolver.append("")
-        print(devolver)
-        return Response(devolver)
+                resp ="Dados Nao Encontrados"
+        return Response(resp)
         
 
 @api_view(['GET', 'POST'])
