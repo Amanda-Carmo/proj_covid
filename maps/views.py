@@ -39,10 +39,14 @@ def api_pais(request):
                                 disponibilidade_quarentena =new_note_data['disponibilidade_quarentena'], 
                                 # nome_user = new_note_data['resp_4'],
                                 idade = new_note_data['idade'])
-        try:
-            lista_paises = new_note_data['continente'][1:-1].split(",")
-        except:
-            lista_paises = ["Brazil"]
+        
+        cont = new_note_data['continente']
+        
+        with open("paises.json", 'r') as fil:
+            dic_paiises = fil
+        lista_paises= dic_paiises[cont]
+        print(cont)
+        print(type(dic_paiises))
             
         idade = float(new_note_data['idade'])
         porcentagem = float(new_note_data['vac_pais'])
