@@ -8,6 +8,6 @@ urlpatterns = [
     path('api/save/', views.api_forms),
     path('api/pais/', views.api_pais),
     path('api/feed', views.api_feed),
-    path('api/maps/', views.api_mapa),
+    # path('api/maps/', views.api_mapa),
 
 ]
