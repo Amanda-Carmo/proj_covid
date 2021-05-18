@@ -25,6 +25,7 @@ def api_forms(request):
                                 vac_pais = float(new_note_data['vac_pais']), 
                                 disponibilidade_quarentena =(new_note_data['disponibilidade_quarentena'] == "True"), 
                                 idade = new_note_data['idade'])
+                                
     serialized_note = MapsSerializer(Profile.objects.latest('id'))
     return Response(serialized_note.data)
     
