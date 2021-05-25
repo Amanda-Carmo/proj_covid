@@ -21,8 +21,9 @@
   }
 
 .form-container{
-    margin-top: 5%;
+    margin-top: 3%;
     width: 66%;
+    height: 100%;
     margin-left: 17%;
     padding-top: 3%;
     padding-bottom: 3%;
@@ -36,6 +37,7 @@
 }
 
 .text{
+    padding-top: 5%;
     text-align: left;
     padding-left: 3%;
     padding-bottom: 5%;
@@ -112,6 +114,75 @@
     color: white;
     background-color: #06559d;
     border-radius: 7px;
+}
 
+.pais-inp{
+    padding-top: 5%;
+    margin-left: 3%;
+}
 
+.pais{
+    margin-top: 3%;
+    background-color: #e3fdff;
+    border-color: #06559d;
+    border-radius: 10px;
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+    text-align: center;
+}
+
+* {box-sizing: border-box;}
+
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+    margin-top: 5%;
+  background-color: #06559d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  border:double;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  top:35%;
+  height: 20%;
+  align-self: center;
+  border: 3px solid #27a7c4;
+  border-radius: 7px;
+  box-shadow: 1px 0px 20px black;
+  z-index: 9;
+}
+
+.tp{
+    font-weight: bold;
+    font-size: large;
+}
+
+.resultado{
+    margin-top: 5%;
+    font-size: larger;
+}
+
+/* Add styles to the form container */
+.form-container1 {
+  width: 300px;
+  padding: 10px;  
+  background-color: white;
+}
+
+/* Add a red background color to the cancel button */
+.cancel {
+  background-color: red;
+  color: white;
+  margin-top: 17%;
+}
+
+/* Add some hover effects to buttons */
+.form-container1 .btn1:hover, .open-button:hover {
+  opacity: 1;
 }

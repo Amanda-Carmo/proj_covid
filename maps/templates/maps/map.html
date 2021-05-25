@@ -2,10 +2,40 @@
 {% load static %}
 
 {% block content %}
+<html xmlns="http://www.w3.org/1999/xhtml"></html>
+<div class="form-container">
+    <div class="pais-inp">
+        <p>Digite o país que gostaria de visitar</p>   
+        <form>
+            <input class="pais" type="text" name="pais" onkeydown="return /[a-z, ]/i.test(event.key)">                      
+        </form>
+    </div>
 
-<div>
-    <p>olá</p>
+    <button class="open-button" onclick="openForm()">Calcular</button>
+    
+    <div class="form-popup" id="myForm">
+      <form action="/action_page.php" class="form-container1">
+        <h1 class="tp">Você poderá viajar em...</h1>
+        <div>
+            <p class="resultado">{{ resultado }} meses</p>
+        </div>
+        <button type="button" class="btn1 cancel" onclick="closeForm()">Fechar</button>
+      </form>
+    </div>
+    
+    <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+    
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+    </script>    
 </div>
+
+
+
 <div>
     <p>vac_propria =  {{ vac_propria }}</p>
 </div>
@@ -21,9 +51,7 @@
 <div>
     <p>idade =  {{ idade }}</p>
 </div>
-<div>
-    <p>resultado =  {{ resultado }}</p>
-</div>
+
 
 {% endblock %}
 
