@@ -1,0 +1,45 @@
+.appbar{
+    z-index:2;
+    position: fixed;
+    left: 0%;
+    top: 0;
+    width: 100%;    
+    display: flex;
+    align-items: center;
+    box-shadow: 1px 0px 20px black;
+    background-color: #27a7c4;
+}
+
+  
+.logo{
+    margin-left: 0.9rem;
+    margin-top:0.3rem;
+    margin-bottom: 0.3rem;
+    margin-right: 0.6rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+.form-container{
+    margin-top: 5%;
+    width: 66%;
+    margin-left: 17%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    place-content: space-evenly; 
+    background-color: #e3fdff;
+}
+
+.text{
+    text-align: left;
+    padding-left: 3%;
+}
+
+.titulo{
+    margin-bottom: 4%;
+    font-size: larger;
+    font-weight: bold;
+}

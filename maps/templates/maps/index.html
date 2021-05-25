@@ -1,0 +1,17 @@
+{% extends "maps/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="appbar">
+    <img class="logo" src="{% static 'maps/img/center_covid_logo.png' %}" /> 
+    <spam class="subtitle">Covid-map</spam>
+</div>
+<div class="form-container">
+    <div class="text">
+        <h1 class="titulo">Bem vindo ao Covid-map!</h1>
+        <p>Preencha o formulário conforme seus requisitos para viajar, aperte em "enviar" e retornaremos o momento e os países ideais para realizá-la.</p>
+        <p>Caso não tenha requisitos, basta apertar o botão "prosseguir".</p> 
+    </div>
+</div>
+
+{% endblock %}

@@ -13,7 +13,7 @@ import random
 
 
 def index(request):
-    return HttpResponse("Olá mundo! Este é o Servidor para o Projeto 2 de TecWeb \n Por Amanda Carmo e Antonio Fonseca")
+    return render(request, 'maps/index.html')
 
 
 
