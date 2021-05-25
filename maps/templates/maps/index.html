@@ -2,10 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="appbar">
-    <img class="logo" src="{% static 'maps/img/center_covid_logo.png' %}" /> 
-    <spam class="subtitle">Covid-map</spam>
-</div>
+
 <div class="form-container">
     <div class="text">
         <h1 class="titulo">Bem vindo ao Covid-map!</h1>
@@ -14,6 +11,7 @@
     </div>
 
     <form class="form">
+        {% csrf_token %}
         <p class="p1">Pretende estar vacinado até o momento da viagem?</p>
         <input type="radio" name="resp_1" value="sim">
         <label for="male">Sim</label><br>
@@ -42,7 +40,8 @@
         <input class="resp-5" type="number" name="resp_2" min="0" max="150">
         <div class="btn-container">
             <input class="btn" type="submit" value="Enviar">
-            <input class="btn" value="Pular"> 
+            {% csrf_token %}
+            <button href="map.html" class="btn" value="Pular">Pular</button> 
         </div>
         
     </form>   
