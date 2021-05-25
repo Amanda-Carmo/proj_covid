@@ -9,9 +9,39 @@
 <div class="form-container">
     <div class="text">
         <h1 class="titulo">Bem vindo ao Covid-map!</h1>
-        <p>Preencha o formulário conforme seus requisitos para viajar, aperte em "enviar" e retornaremos o momento e os países ideais para realizá-la.</p>
+        <p class="t1">Preencha o formulário conforme seus requisitos para viajar, aperte em "enviar" e retornaremos o momento e os países ideais para realizá-la.</p>
         <p>Caso não tenha requisitos, basta apertar o botão "prosseguir".</p> 
     </div>
+
+    <form class="form">
+        <p class="p1">Pretende estar vacinado até o momento da viagem?</p>
+        <input type="radio" name="resp_1" value="sim">
+        <label for="male">Sim</label><br>
+        <input type="radio" name="resp_1" value="nao">
+        <label for="female">Não</label><br>
+
+        <p class="p2">Para viajar, qual percentual de vacinação do local você considera razoável?</p>
+        <input class="resp-2" type="number" id="quantity" name="resp_2" min="0" max="100">
+
+        <p class="p2">Está disposto a fazer quarentena antes de viajar conforme requisitado pelo país?</p>
+        <input type="radio" name="resp_3" value="sim2">
+        <label for="male">Sim</label><br>
+        <input type="radio" name="resp_3" value="nao2">
+        <label for="female">Não</label><br>
+
+        <p class="p2">Selecione o continente para o qual deseja ir. Se não tiver preferências, deixe em branco</p>
+        <select class="resp-4" name="resp_4" id="cars">
+          <option value="África">África</option>
+          <option value="Américas">Américas</option>
+          <option value="Ásia">Ásia</option>
+          <option value="Europa">Europa</option>
+          <option value="Oeania">Oceania</option>
+        </select>
+
+        <p class="p2">Qual a sua idade?</p>
+        <input class="resp-5" type="number" id="quantity" name="resp_2" min="0" max="150">
+    </form>       
 </div>
+
 
 {% endblock %}
