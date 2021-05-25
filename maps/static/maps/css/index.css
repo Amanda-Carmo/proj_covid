@@ -52,6 +52,7 @@
 }
 
 .form{
+    flex-direction: column;
     padding-left: 3%;
 }
 
@@ -99,3 +100,18 @@
     border-color: #06559d;
 }
 
+.btn-container{
+    margin-top: 5%;
+    margin-right: 50%;
+    width: 20%;
+}
+
+.btn{
+    width: 40%;
+    text-align: center;
+    color: white;
+    background-color: #06559d;
+    border-radius: 7px;
+
+
+}
