@@ -2,8 +2,34 @@
 {% load static %}
 
 {% block content %}
+
 <div>
     <p>olá</p>
 </div>
+<div>
+    <p>vac_propria =  {{ vac_propria }}</p>
+</div>
+<div>
+    <p>vac_pais =  {{ vac_pais }}</p>
+</div>
+<div>
+    <p>disponibilidade_quarentena =  {{ disponibilidade_quarentena }}</p>
+</div>
+<div>
+    <p>continente =  {{ continente }}</p>
+</div>
+<div>
+    <p>idade =  {{ idade }}</p>
+</div>
+<div>
+    <p>resultado =  {{ resultado }}</p>
+</div>
 
 {% endblock %}
+
+
+vac_propria = request.POST.get('resp_1')[0]
+vac_pais = request.POST.get('resp_2')[0]
+disponibilidade_quarentena = request.POST.get('resp_3')[0]
+continente = request.POST.get('resp_4')[0]
+idade = request.POST.get('resp_5')[0]

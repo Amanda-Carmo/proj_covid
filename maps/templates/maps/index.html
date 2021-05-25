@@ -10,21 +10,21 @@
         <p>Caso não tenha requisitos, basta apertar o botão "prosseguir".</p> 
     </div>
 
-    <form class="form">
+    <form class="form" action='/mapa/' method="post">
         {% csrf_token %}
         <p class="p1">Pretende estar vacinado até o momento da viagem?</p>
-        <input type="radio" name="resp_1" value="sim">
+        <input type="radio" name="resp_1" value="True">
         <label for="male">Sim</label><br>
-        <input type="radio" name="resp_1" value="nao">
+        <input type="radio" name="resp_1" value="False">
         <label for="female">Não</label><br>
 
         <p class="p2">Para viajar, qual percentual de vacinação do local você considera razoável?</p>
         <input class="resp-2" type="number" id="quantity" name="resp_2" min="0" max="100">
 
         <p class="p2">Está disposto a fazer quarentena antes de viajar conforme requisitado pelo país?</p>
-        <input type="radio" name="resp_3" value="sim2">
+        <input type="radio" name="resp_3" value="True">
         <label for="male">Sim</label><br>
-        <input type="radio" name="resp_3" value="nao2">
+        <input type="radio" name="resp_3" value="False">
         <label for="female">Não</label><br>
 
         <p class="p2">Selecione o continente para o qual deseja ir. Se não tiver preferências, deixe em branco</p>
@@ -37,7 +37,7 @@
         </select>
 
         <p class="p2">Qual a sua idade?</p>
-        <input class="resp-5" type="number" name="resp_2" min="0" max="150">
+        <input class="resp-5" type="number" name="resp_5" min="0" max="150">
         <div class="btn-container">
             <input class="btn" type="submit" value="Enviar">
             {% csrf_token %}
