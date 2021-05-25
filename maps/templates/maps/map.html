@@ -8,10 +8,11 @@
         <p>Digite o país que gostaria de visitar</p>   
         <form>
             <input class="pais" type="text" name="pais" onkeydown="return /[a-z, ]/i.test(event.key)">                      
+            <input class="btn" type="submit" value="Enviar">
+            <input class="open-button" type="submit" value="Calcular" onclick="openForm()">
+            {% csrf_token %}
         </form>
     </div>
-
-    <button class="open-button" onclick="openForm()">Calcular</button>
     
     <div class="form-popup" id="myForm">
       <form action="/action_page.php" class="form-container1">
