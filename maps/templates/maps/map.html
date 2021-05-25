@@ -8,7 +8,6 @@
         <p>Digite o país que gostaria de visitar</p>   
         <form>
             <input class="pais" type="text" name="pais" onkeydown="return /[a-z, ]/i.test(event.key)">                      
-            <input class="btn" type="submit" value="Enviar">
             <input class="open-button" type="submit" value="Calcular" onclick="openForm()">
             {% csrf_token %}
         </form>
