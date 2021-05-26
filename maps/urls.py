@@ -6,9 +6,9 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('mapa/', views.mapa, name='mapa'),
-    path('api/save/', views.api_forms),
-    path('api/pais/', views.api_pais),
-    path('api/feed', views.api_feed),
+    path('api/pais/', views.api_forms),
+    # path('api/save/', views.api_forms),
+    # path('api/feed', views.api_feed),
     # path('api/maps/', views.api_mapa),
 
 ]

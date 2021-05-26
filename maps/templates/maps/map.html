@@ -5,28 +5,60 @@
 <html xmlns="http://www.w3.org/1999/xhtml"></html>
 <div class="form-container">
     <div class="pais-inp">
-        <p>Digite o país que gostaria de visitar</p>   
-        <form>
-            <input class="pais" type="text" name="pais" onkeydown="return /[a-z, ]/i.test(event.key)">                      
-            <input class="open-button" type="submit" value="Calcular" onclick="openForm()">
+        <h1>Digite o país que gostaria de visitar</h1>
+        <h2>Em ingles, por favor</h2>   
+        <form onsubmit= "return false">
+            <input id="a" class="pais" type="text" name="pais" onkeydown="return /[a-z, ]/i.test(event.key)">                      
+            <input class="open-button" type="submit" value="Calcular" onclick="func('{{ vac_propria }}','{{ vac_pais }}',document.getElementById('a').value,'{{ idade }}')">
             {% csrf_token %}
         </form>
     </div>
+
     
-    <div class="form-popup" id="myForm">
+    <div class="form-popup" id="myForm" >
       <form action="/action_page.php" class="form-container1">
-        <h1 class="tp">Você poderá viajar em...</h1>
+        <h1 id = 'c' class="tp">Você poderá viajar em:</h1> 
+        <h1 id="b"> </h1>
+        <h1 id='d'> meses</h1>
         <div>
-            <p class="resultado">{{ resultado }} meses</p>
+            <p id='resul' class="resultado">  </p>
         </div>
         <button type="button" class="btn1 cancel" onclick="closeForm()">Fechar</button>
       </form>
     </div>
     
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
     }
+    async function func(arg1,arg2,arg3,arg4){
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
+        tesp = await axios.post('http://localhost:8000/api/pais/' ,{vac_propria:arg1,
+            vac_pais:arg2,
+            continente:arg3,
+            idade:arg4,
+        } );
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!")
+        console.log(tesp.data)
+        let resp = Math.round(tesp.data * 100) / 100;
+
+        if (isNaN(resp)){
+            console.log("22222222222")
+            document.getElementById("c").innerHTML = tesp.data;
+            document.getElementById("d").innerHTML = "";
+            document.getElementById("b").innerHTML = "";
+
+        }
+        else{
+            console.log("111111111")
+            document.getElementById("c").innerHTML = 'Você poderá viajar em:';
+            document.getElementById("b").innerHTML = resp;
+            document.getElementById("d").innerHTML = "meses";
+
+        }
+        openForm();
+  }
     
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
@@ -34,30 +66,4 @@
     </script>    
 </div>
 
-
-
-<div>
-    <p>vac_propria =  {{ vac_propria }}</p>
-</div>
-<div>
-    <p>vac_pais =  {{ vac_pais }}</p>
-</div>
-<div>
-    <p>disponibilidade_quarentena =  {{ disponibilidade_quarentena }}</p>
-</div>
-<div>
-    <p>continente =  {{ continente }}</p>
-</div>
-<div>
-    <p>idade =  {{ idade }}</p>
-</div>
-
-
 {% endblock %}
-
-
-vac_propria = request.POST.get('resp_1')[0]
-vac_pais = request.POST.get('resp_2')[0]
-disponibilidade_quarentena = request.POST.get('resp_3')[0]
-continente = request.POST.get('resp_4')[0]
-idade = request.POST.get('resp_5')[0]
